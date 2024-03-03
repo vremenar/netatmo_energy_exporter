@@ -1,10 +1,10 @@
-FROM golang:1.21.5-alpine3.19 as builder
+FROM golang:latest as builder
 
 COPY ./  /data/
 
 RUN cd /data && go build -o netatmo-exporter
 
-FROM alpine:3.19
+FROM alpine:latest
 
 RUN addgroup -g 1001 -S appgroup && \
     adduser --u 1001 -S appuser appgroup
