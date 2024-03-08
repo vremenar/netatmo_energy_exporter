@@ -7,8 +7,9 @@ on:
     - cron: '0 22 1 * *'
 
 env:
-  IMAGE_NAME: netatmo-energy-exporter
-  REGISTRY: ghcr.io
+  IMAGENAME: netatmo-energy-exporter
+  GHCR: ghcr.io
+  DOCKER: docker.io
 
 jobs:
   test:
@@ -93,10 +94,10 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: | 
-            ghcr.io/vremenar/netatmo-energy-exporter:latest
-            ghcr.io/vremenar/netatmo-energy-exporter:${{ steps.date.outputs.date }}
-            vremenar/netatmo-energy-exporter:latest
-            vremenar/netatmo-energy-exporter:${{ steps.date.outputs.date }}
+            ${{ env.GHCR }}/vremenar/${{ env.IMAGENAME }}:latest
+            ${{ env.GHCR }}/vremenar/${{ env.IMAGENAME }}:${{ steps.date.outputs.date }}
+            ${{ env.DOCKER }}/vremenar/${{ env.IMAGENAME }}:latest
+            ${{ env.DOCKER }}/vremenar/${{ env.IMAGENAME }}:${{ steps.date.outputs.date }}
   image-vulnerability-scan:
     runs-on: ubuntu-latest
     needs:
