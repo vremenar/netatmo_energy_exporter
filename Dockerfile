@@ -3,7 +3,7 @@ FROM golang:latest as builder
 COPY ./  /data/
 
 WORKDIR /data
-RUN go build -o netatmo-exporter
+RUN go mod tidy && go mod download && go mod vendor && go build -o netatmo-exporter
 
 FROM alpine:latest
 
