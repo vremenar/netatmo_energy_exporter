@@ -1,11 +1,11 @@
-FROM golang:latest as builder
+FROM golang:alpine as builder
 
 COPY ./  /data/
 
 WORKDIR /data
 RUN go mod tidy && go mod download && go mod vendor && go build -o netatmo-exporter
 
-FROM golang:latest
+FROM alpine:latest
 
 COPY --from=builder /data/netatmo-exporter /app/netatmo-exporter
 
