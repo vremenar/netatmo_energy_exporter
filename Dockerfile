@@ -5,7 +5,7 @@ COPY ./  /data/
 WORKDIR /data
 RUN go mod tidy && go mod download && go mod vendor && go build -o netatmo-exporter
 
-FROM alpine:latest
+FROM golang:latest
 
 COPY --from=builder /data/netatmo-exporter /app/netatmo-exporter
 
