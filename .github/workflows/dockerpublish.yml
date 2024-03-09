@@ -55,10 +55,11 @@ jobs:
       - golangci-lint
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Perform Scan
-        uses: ShiftLeftSecurity/scan-action@master
+      - uses: actions/checkout@master
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
   build-and-push:
     needs:
       - test
